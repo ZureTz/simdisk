@@ -6,7 +6,8 @@ add_requires("drogon")
 
 target("simdisk")
   set_kind("binary")
-  -- add_includedirs("include")
-  add_files("main.cc")
+  add_includedirs("include")
+  add_files("src/controller/*.cc")
+  add_files("src/main.cc")
   add_packages("drogon")
 

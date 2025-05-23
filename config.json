@@ -1,0 +1,15 @@
+{
+  "listeners": [
+    {
+      "address": "localhost",
+      "port": 8080,
+      "https": false
+    }
+  ],
+  "log": {
+    "log_path": "./logs",
+    "logfile_base_name": "log",
+    "log_size_limit": 100000000,
+    "log_level": "TRACE"
+  }
+}
