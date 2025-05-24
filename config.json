@@ -6,16 +6,17 @@
       "https": false
     }
   ],
-  "log": {
-    "log_path": "./logs",
-    "logfile_base_name": "log",
-    "log_size_limit": 100000000,
-    "log_level": "TRACE"
-  },
+
   "app": {
+    "document_root": "./web/",
+    "upload_path": "assets",
     "client_max_body_size": "",
-    "client_max_memory_body_size": ""
-  },
-  "document_root": "web/",
-  "upload_path":"assets"
+    "client_max_memory_body_size": "64M",
+    "log": {
+      "log_path": "./logs",
+      "logfile_base_name": "log",
+      "log_size_limit": 100000000,
+      "log_level": "DEBUG"
+    }
+  }
 }

@@ -3,6 +3,7 @@
     "drogon",
     "fccb",
     "includedirs",
+    "logfile",
     "simdisk",
     "trantor"
   ]

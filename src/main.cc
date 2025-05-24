@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <drogon/HttpAppFramework.h>
 #include <trantor/utils/Logger.h>
 
@@ -7,10 +5,9 @@ using namespace drogon;
 
 int main() {
   // Version of drogon
-  std::cout << "Drogon version: " << getVersion() << std::endl;
+  LOG_DEBUG << "Drogon version: " << getVersion();
   // Current working directory is the root of the project
-  std::cout << "Current working directory: " << std::filesystem::current_path()
-            << std::endl;
+  LOG_DEBUG << "Current working directory: " << std::filesystem::current_path();
 
   // Load config file
   app().loadConfigFile("config.json");
