@@ -3,10 +3,14 @@ package main
 import (
 	"github.com/ZureTz/simdisk/controllers"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 )
 
 func main() {
 	r := gin.Default()
+
+	// Allow CORS for all origins
+	r.Use(cors.Default())
 
 	// Handle file uploads
 	r.POST("/api/upload", controllers.UploadFile)
