@@ -7,21 +7,21 @@ import (
 
 func main() {
 	r := gin.Default()
-	// Set up a simple GET endpoint
-	// r.GET("/ping", func(c *gin.Context) {
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"message": "pong",
-	// 	})
-	// })
-
-	// Handle static files
-	r.Static("/static", "./static")
 
 	// Handle file uploads
 	r.POST("/api/upload", controllers.UploadFile)
 
 	// Handle the list of files
 	r.GET("/api/files", controllers.ListFiles)
+
+	// Create new folder
+	r.POST("/api/createFolder", controllers.CreateFolder)
+
+	// Download a file
+	r.GET("/api/download", controllers.DownloadFile)
+
+	// Delete a file
+	r.DELETE("/api/delete", controllers.DeleteFile)
 
 	r.Run(":8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

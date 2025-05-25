@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -30,6 +31,14 @@ func UploadFile(c *gin.Context) {
 		return
 	}
 
+	// Get relative path from the request parameters
+	relativePath := c.Query("path")
+
+	// Replace all ',' with '/' to ensure proper path formatting
+	relativePath = strings.ReplaceAll(relativePath, ",", "/")
+	// Log the relative path for debugging
+	fmt.Println("Relative path:", relativePath)
+
 	// Save file in a for loop
 	for i := range fileCount {
 		// Generate the file name based on the index
@@ -47,7 +56,7 @@ func UploadFile(c *gin.Context) {
 		}
 
 		// Save the file to the server
-		if err := c.SaveUploadedFile(file, "./static/"+file.Filename); err != nil {
+		if err := c.SaveUploadedFile(file, "./static/"+relativePath+"/"+file.Filename); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"error": "File save failed",
 			})
