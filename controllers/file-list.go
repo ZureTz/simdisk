@@ -62,7 +62,7 @@ func ListFiles(c *gin.Context) {
 			Id:           0,
 			Filename:     "No files found",
 			Size:         0,
-			IsFolder:     true,
+			IsFolder:     false,
 			RelativePath: relativePath,
 		})
 		// Return an empty file list
