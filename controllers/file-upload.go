@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/ZureTz/simdisk/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -39,6 +40,9 @@ func UploadFile(c *gin.Context) {
 	// Log the relative path for debugging
 	fmt.Println("Relative path:", relativePath)
 
+	// Get working directory from the config
+	workingDir := utils.Config.WorkingDirectory.Path
+
 	// Save file in a for loop
 	for i := range fileCount {
 		// Generate the file name based on the index
@@ -56,7 +60,7 @@ func UploadFile(c *gin.Context) {
 		}
 
 		// Save the file to the server
-		if err := c.SaveUploadedFile(file, "./static/"+relativePath+"/"+file.Filename); err != nil {
+		if err := c.SaveUploadedFile(file, workingDir+relativePath+"/"+file.Filename); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"error": "File save failed",
 			})

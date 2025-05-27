@@ -1,12 +1,19 @@
 package main
 
 import (
-	"github.com/ZureTz/simdisk/controllers"
-	"github.com/gin-gonic/gin"
+	"strconv"
+
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+
+	"github.com/ZureTz/simdisk/controllers"
+	"github.com/ZureTz/simdisk/utils"
 )
 
 func main() {
+	// Initialize the configuration
+	utils.InitConfig()
+
 	r := gin.Default()
 
 	// Allow CORS for all origins
@@ -27,5 +34,9 @@ func main() {
 	// Delete a file
 	r.DELETE("/api/delete", controllers.DeleteFile)
 
-	r.Run(":8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	// Get port from config
+	portNumber := strconv.Itoa(utils.Config.Server.Port)
+
+	// listen and serve on given port from config
+	r.Run(":" + portNumber)
 }

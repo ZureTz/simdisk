@@ -77,6 +77,5 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/go,visualstudiocode,macos
 
-# Static file directory where server backend files are stored
-static/
-
+# Configuration files
+config.toml

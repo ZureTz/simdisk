@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/ZureTz/simdisk/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,8 +41,11 @@ func CreateFolder(c *gin.Context) {
 		}
 	}
 
-	// Create the new folder in the static directory
-	err := os.Mkdir("./static/"+relativePath+"/"+folderName, 0755)
+	// Get the working directory from the config
+	workingDir := utils.Config.WorkingDirectory.Path
+
+	// Create the new folder in the working directory
+	err := os.Mkdir(workingDir+relativePath+"/"+folderName, 0755)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Failed to create folder",

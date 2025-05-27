@@ -7,6 +7,8 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/ZureTz/simdisk/utils"
 )
 
 // DeleteFile handles the request to delete a file
@@ -29,8 +31,9 @@ func DeleteFile(c *gin.Context) {
 		return
 	}
 
+	workingDir := utils.Config.WorkingDirectory.Path
 	// Construct the full file path
-	filePath := "./static/" + relativePath + "/" + fileName
+	filePath := workingDir + relativePath + "/" + fileName
 	fmt.Println("Relative path file:", filePath)
 
 	// Remove the file

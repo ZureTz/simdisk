@@ -1,0 +1,5 @@
+[working-directory]
+path = "/home/"
+
+[server]
+port = 8080

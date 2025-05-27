@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/ZureTz/simdisk/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,8 +29,9 @@ func DownloadFile(c *gin.Context) {
 	// Log the relative path for debugging
 	fmt.Println("Relative path:", relativePath)
 
+	workingDir := utils.Config.WorkingDirectory.Path
 	// Construct the full file path
-	filePathFull := "./static/" + relativePath + "/" + fileName
+	filePathFull := workingDir + relativePath + "/" + fileName
 	fmt.Println("File path:", filePathFull)
 
 	// Check if the file exists

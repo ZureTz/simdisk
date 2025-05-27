@@ -8,6 +8,8 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/ZureTz/simdisk/utils"
 )
 
 // Example structure for the file list response
@@ -33,7 +35,7 @@ type FileDetails struct {
 	RelativePath string `json:"relativePath"`
 }
 
-// ListFiles handles the request to list files in the static directory
+// ListFiles handles the request to list files in the working directory
 func ListFiles(c *gin.Context) {
 	// Get relative path from the request parameters
 	relativePath := c.Query("path")
@@ -44,8 +46,9 @@ func ListFiles(c *gin.Context) {
 	// Log the relative path for debugging
 	fmt.Println("Relative path:", relativePath)
 
-	// Get the list of files in the static directory
-	files, err := os.ReadDir("./static/" + relativePath)
+	// Get the list of files in the working directory
+	workingDir := utils.Config.WorkingDirectory.Path
+	files, err := os.ReadDir(workingDir + relativePath)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "No such file or directory",
