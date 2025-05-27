@@ -79,3 +79,6 @@ Temporary Items
 
 # Configuration files
 config.toml
+
+# build directory
+build/
