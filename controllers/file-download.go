@@ -35,7 +35,9 @@ func DownloadFile(c *gin.Context) {
 	fmt.Println("File path:", filePathFull)
 
 	// Check if the file exists
-	if _, err := os.Stat(filePathFull); os.IsNotExist(err) {
+	var stat os.FileInfo
+	var err error
+	if stat, err = os.Stat(filePathFull); os.IsNotExist(err) {
 		c.JSON(http.StatusNotFound, gin.H{
 			"error": "File not found",
 		})
@@ -44,8 +46,9 @@ func DownloadFile(c *gin.Context) {
 
 	// Set the response headers to indicate file download
 	c.Header("Content-Description", "File Transfer")
-	c.Header("Content-Disposition", fmt.Sprintf("attachment; filename=%s", fileName))
+	c.Header("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileName))
 	c.Header("Content-Type", "application/octet-stream")
+	c.Header("Content-Length", fmt.Sprintf("%d", stat.Size()))
 	c.Header("Content-Transfer-Encoding", "binary")
 	c.Header("Expires", "0")
 	c.Header("Cache-Control", "must-revalidate")
